@@ -18,18 +18,30 @@ const input = fs
  * solution([199, 200, 208, 210, 200, 207, 240, 269, 260, 263])
  * // returns 7
  */  
-const solution = (input) => {
+const part1 = (input) => {
   let inc = 0
-  let arr = []
-  for (let i = 0; i < input.length; i++) {
-    arr.push(input[i])
-  }
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < arr[i + 1]) {
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] < input[i + 1]) {
       inc++
     }
   }
   return inc
 }
-console.log(solution(input))
+console.log(part1(input))
+
+// Part 2 is similar but requires a sliding window approach where window A (last) is the sum of indexes 0 - 2 and window B (current) is the sum of indexes 1 - 3
+const part2 = (input) => {
+  let inc = 0
+
+  for (let i = 0; i < input.length; i++) {
+    const last = input[i - 1] + input[i - 2] + input[i - 3]
+    const current = input[i ] + input[i - 1] + input[i - 2]
+    if (current > last) {
+      inc++
+    }
+  }
+  return inc
+}
+
+console.log(part2(input))
