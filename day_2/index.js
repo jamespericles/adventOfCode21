@@ -18,8 +18,6 @@ const input = fs
  * // returns horizontal position of 15, depth of 10 => 150
  */
 
-// loop through, slice each index, based on the string decide what to increment/decrement and by how much, return horizontal * depth
-
 const part1 = (input) => {
   let horizontal = 0,
     depth = 0
@@ -46,3 +44,32 @@ const part1 = (input) => {
 }
 
 part1(input)
+
+const part2 = (input) => {
+  let horizontal = 0,
+    depth = 0,
+    aim = 0
+
+  for (let i = 0; i < input.length; i++) {
+    // Create a subarray on the expected white space. ['forward 8', 'down 5'] => [['forward', '8'], ['down', '5']] 
+    let instructionSet = input[i].split(/\s/g)
+
+    switch (instructionSet[0]) {
+      case 'forward':
+        horizontal += parseInt(instructionSet[1])
+        depth += (parseInt(instructionSet[1]) * aim)
+        break;
+      case 'down':
+        aim += parseInt(instructionSet[1])
+        break;
+      case 'up':
+        aim -= parseInt(instructionSet[1])
+        break;
+        default:
+        break;
+    }
+  }
+  console.log(horizontal * depth)
+}
+
+part2(input)
