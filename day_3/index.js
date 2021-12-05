@@ -7,28 +7,7 @@ const input = fs
   .readFileSync('input.txt', { encoding: 'utf-8' })
   .split('\n')
   .map((x => x.split('')))
-console.log(input)
-/**
- * @param {[[binary], [binary], ...[binary]]} input - Expected input in the form of a two-dimensional array. Each subarray contains a string of binary code
- * @var gamma The most common bit from each column
- * @var epsilon the inverse of the gamma
- * @returns epsilon * gamma
- * 
- * @example
- * part1([
- * [00100],
- * [11110],
- * [10110],
- * [10111],
- * [10101],
- * [01111],
- * [00111],
- * [11100],
- * [10000],
- * [11001],
- * [00010],
- * [01010]]) => gamma = 10110, epsilon = 01001, 198 in decimal
- */
+// This converts input into a 2D array of strings for each bit
 
 /**
  * 
@@ -57,13 +36,34 @@ const inverseGamma = (gamma) => {
   }).join('')
 }
 
+/**
+ * @param {[[binary], [binary], ...[binary]]} input - Expected input in the form of a two-dimensional array. Each subarray is of equal length and contains a string of binary code
+ * @var gamma The most common bit from each column
+ * @var epsilon the inverse of the gamma
+ * @returns {number} epsilon * gamma
+ * 
+ * @example part1([
+ * [00100],
+ * [11110],
+ * [10110],
+ * [10111],
+ * [10101],
+ * [01111],
+ * [00111],
+ * [11100],
+ * [10000],
+ * [11001],
+ * [00010],
+ * [01010]]) => gamma = 10110, epsilon = 01001, 198 in decimal
+ */
 const part1 = (input) => {
   let gamma = '', epsilon = ''
+  let subarrayLen = input[0].length
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < subarrayLen; i++) {
     const col = inputCol(input, i)
     let oneBit = 0, zeroBit = 0
-    // console.log(col)
+
     for (let j = 0; j < col.length; j++) {
 
       if (col[j] === 1) {
@@ -83,4 +83,55 @@ const part1 = (input) => {
   console.log(parseInt(gamma, 2) * parseInt(epsilon, 2))
 }
 
-part1(input)
+// part1(input)
+
+/**
+ * 
+ * @param {[binary]} col 
+ * @returns The most common bit, either 0 or 1, as an integer
+ */
+const commonBit = (col) => {
+  let one = 0, zero = 0, common
+  for (let i = 0; i < col.length; i++) {
+    if (col[i] === 1) {
+      one++
+    } else if (col[i] === 0) {
+      zero++
+    }
+  }
+  if (one > zero) {
+    return common = 1
+  } else {
+    return common = 0
+  }
+}
+
+const part2 = (input) => {
+  let oxygen = '', scrubber = ''
+
+  for (let i = 0; i < 12; i++) {
+    const col = inputCol(input, i)
+    let oneBit = 0, zeroBit = 0
+    // console.log(col)
+
+    for (let j = 0; j < col.length; j++) {
+      if (col[j] === 1) {
+        oneBit++
+      } else if (col[j] === 0) {
+        zeroBit++
+      }
+    }
+    // oxygen cares about most common
+    // scrubber is least common
+
+    console.log(commonBit(col))
+    // I wrote commonBit() to correspond with comparing oneBit and zeroBit
+    // if (commonBit(col)) {
+
+    // }
+
+  }
+  
+}
+
+part2(input)
