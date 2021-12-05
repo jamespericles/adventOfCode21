@@ -7,7 +7,7 @@ const input = fs
   .readFileSync('input.txt', { encoding: 'utf-8' })
   .split('\n')
   .map((x => x.split('')))
-// console.log(input)
+console.log(input)
 /**
  * @param {[[binary], [binary], ...[binary]]} input - Expected input in the form of a two-dimensional array. Each subarray contains a string of binary code
  * @var gamma The most common bit from each column
