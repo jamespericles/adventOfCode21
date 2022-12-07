@@ -99,37 +99,30 @@ const commonBit = (col) => {
       zero++
     }
   }
-  if (one > zero) {
+  if (one > zero || one === zero) {
     return common = 1
   } else {
     return common = 0
   }
 }
 
+const findOxygen = (col, i, input) => {
+  let mostCommon = commonBit(col)
+
+  input.filter(el => el[i] === mostCommon)
+
+  // if (input[i] !== mostCommon) {
+  //   input.slice(i, 1)
+  // }
+  console.log(input)
+  // console.log(input.filter((el) => {  console.log(el[i] === mostCommon) }))
+}
+
 const part2 = (input) => {
-  let oxygen = '', scrubber = ''
 
   for (let i = 0; i < 12; i++) {
     const col = inputCol(input, i)
-    let oneBit = 0, zeroBit = 0
-    // console.log(col)
-
-    for (let j = 0; j < col.length; j++) {
-      if (col[j] === 1) {
-        oneBit++
-      } else if (col[j] === 0) {
-        zeroBit++
-      }
-    }
-    // oxygen cares about most common
-    // scrubber is least common
-
-    console.log(commonBit(col))
-    // I wrote commonBit() to correspond with comparing oneBit and zeroBit
-    // if (commonBit(col)) {
-
-    // }
-
+    findOxygen(col, i, input)
   }
   
 }
